@@ -1,0 +1,37 @@
+# This is a basic workflow that is manually triggered
+
+name: Manual Build
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    name: ubuntu-18.04
+    runs-on: ubuntu-18.04
+    container: devkitpro/devkitppc:latest
+    
+    steps:
+    - uses: actions/checkout@v1
+      with:
+        submodules: true
+
+
+    - name: Install cmake
+      run: |
+        apt-get install -y cmake
+    - name: Build
+      run : |
+        cd resources/3-1-HelloWorld
+        mkdir build
+        cd build
+        cmake ..
+        make -j4 
+    - name: Upload Files
+      uses: actions/upload-artifact@v2
+      with:
+        name: Build
+        path: "resources/3-1-HelloWorld/build/helloworld.rpx"
