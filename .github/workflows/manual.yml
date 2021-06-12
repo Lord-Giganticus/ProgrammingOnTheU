@@ -43,4 +43,4 @@ jobs:
         name: Build
         path: |
           resources/3-1-HelloWorld/build/helloworld.rpx
-          resources/4-1-ButtonTester/build/buttontest/rpx
+          resources/4-1-ButtonTester/build/buttontest.rpx
